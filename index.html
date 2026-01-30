@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电动汽车智能控制理论 with 方法</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- GSAP 动画库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js 用于3D效果 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- 鼠标跟随光点 -->
+    <div class="cursor-light"></div>
+    
+    <!-- Hero 区域 -->
+    <section class="hero-section" id="home-section">
+        <div class="hero-card">
+            <!-- Hero 内容 -->
+            <div class="hero-content">
+                <div class="hero-left">
+                    <h1 class="hero-title">
+                        <span class="title-line">电动汽车智能控制</span>
+                        <span class="title-line">理论与方法</span>
+                    </h1>
+                    <p class="hero-subtitle">Intelligent Control Theories and Methods for Electric Vehicles</p>
+                    <div class="hero-badge">"十四五"规划教材</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 导航按钮模块 -->
+        <div class="nav-buttons-section">
+            <div class="nav-buttons-container">
+                <button class="nav-module-btn" data-section="book">
+                    <span class="nav-module-icon">📖</span>
+                    <span class="nav-module-text">教材介绍</span>
+                </button>
+                <button class="nav-module-btn" data-section="content">
+                    <span class="nav-module-icon">📚</span>
+                    <span class="nav-module-text">核心内容</span>
+                </button>
+                <button class="nav-module-btn" data-section="ai">
+                    <span class="nav-module-icon">🤖</span>
+                    <span class="nav-module-text">AI助手</span>
+                </button>
+                <button class="nav-module-btn" data-section="references">
+                    <span class="nav-module-icon">📄</span>
+                    <span class="nav-module-text">参考资料</span>
+                </button>
+                <button class="nav-module-btn" data-section="cases">
+                    <span class="nav-module-icon">🔍</span>
+                    <span class="nav-module-text">案例分析</span>
+                </button>
+                <button class="nav-module-btn" data-section="courses">
+                    <span class="nav-module-icon">🎓</span>
+                    <span class="nav-module-text">推荐课程</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 动态背景元素 -->
+    <div class="dynamic-background">
+        <svg class="circuit-lines-bg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <linearGradient id="lineGradientBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:0.15" />
+                    <stop offset="50%" style="stop-color:#00B8A9;stop-opacity:0.12" />
+                    <stop offset="100%" style="stop-color:#FF6B35;stop-opacity:0.15" />
+                </linearGradient>
+            </defs>
+            <!-- 动态电路线条 -->
+            <path class="circuit-path-bg" d="M0,200 Q480,100 960,200 T1920,200" stroke="url(#lineGradientBg)" stroke-width="2" fill="none"/>
+            <path class="circuit-path-bg" d="M0,400 Q480,300 960,400 T1920,400" stroke="url(#lineGradientBg)" stroke-width="1.5" fill="none"/>
+            <path class="circuit-path-bg" d="M0,600 Q480,500 960,600 T1920,600" stroke="url(#lineGradientBg)" stroke-width="2" fill="none"/>
+            <path class="circuit-path-bg" d="M0,800 Q480,700 960,800 T1920,800" stroke="url(#lineGradientBg)" stroke-width="1.5" fill="none"/>
+            <!-- 垂直连接线 -->
+            <line class="circuit-path-bg" x1="200" y1="0" x2="200" y2="1080" stroke="url(#lineGradientBg)" stroke-width="1"/>
+            <line class="circuit-path-bg" x1="600" y1="0" x2="600" y2="1080" stroke="url(#lineGradientBg)" stroke-width="1"/>
+            <line class="circuit-path-bg" x1="1000" y1="0" x2="1000" y2="1080" stroke="url(#lineGradientBg)" stroke-width="1"/>
+            <line class="circuit-path-bg" x1="1400" y1="0" x2="1400" y2="1080" stroke="url(#lineGradientBg)" stroke-width="1"/>
+            <line class="circuit-path-bg" x1="1720" y1="0" x2="1720" y2="1080" stroke="url(#lineGradientBg)" stroke-width="1"/>
+        </svg>
+        <!-- 浮动粒子点 -->
+        <div class="floating-dots">
+            <div class="dot dot-1"></div>
+            <div class="dot dot-2"></div>
+            <div class="dot dot-3"></div>
+            <div class="dot dot-4"></div>
+            <div class="dot dot-5"></div>
+            <div class="dot dot-6"></div>
+        </div>
+    </div>
+
+    <!-- 书籍介绍模块 -->
+    <section class="book-section content-section" id="book-section">
+        <div class="container">
+            <h2 class="section-title">教材介绍</h2>
+            
+            <!-- 教材内部导航按钮 -->
+            <div class="book-tabs">
+                <button class="book-tab-btn active" data-tab="home">首页</button>
+                <button class="book-tab-btn" data-tab="summary">教材简介</button>
+                <button class="book-tab-btn" data-tab="copyright">版权信息</button>
+            </div>
+
+            <!-- 首页内容 -->
+            <div class="book-tab-content active" id="tab-home">
+                <div class="book-card-wrapper">
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="电动汽车智能控制理论与方法书籍封面.jpg" alt="电动汽车智能控制理论与方法">
+                            <div class="book-glow"></div>
+                        </div>
+                        <div class="book-info">
+                            <h3>电动汽车智能控制理论与方法</h3>
+                            <p class="book-field">智能网联与新能源汽车领域推荐教材</p>
+                            <div class="book-meta">
+                                <div class="meta-item">
+                                    <span class="meta-label">领域：</span>
+                                    <span class="meta-value">智能网联 / 新能源汽车</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">类型：</span>
+                                    <span class="meta-value">"十四五"规划教材</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 教材简介内容 -->
+            <div class="book-tab-content" id="tab-summary">
+                <div class="book-text-card">
+                    <p>本书为教育部战略性新兴领域“十四五”高等教育教材体系系列。 本书系统讲解了经典控制、现代控制、模型预测控制、非线性控制等先进控制理论，以完善学生在电动汽车智能控制领域的知识体系。此外，进一步引入了神经网络、强化学习、模仿学习等多个前沿控制方法，聚焦对学生“AI for Science”交叉创新能力的培养。各个章节还精选了电动汽车智能控制领域的研究、工程实践案例，旨在培育学生对于电动汽车各类控制问题求解的工程实践能力，激发学生的创新思维。</p>
+                    <p style="margin-top: 20px;">本书可作为高等院校车辆工程专业或其他相关专业智能电动汽车试验理论与技术教学的专业教材，也可作为汽车相关行业从业人员的技术参考书。</p>
+                </div>
+            </div>
+
+            <!-- 版权信息内容 -->
+            <div class="book-tab-content" id="tab-copyright">
+                <div class="book-copyright-card">
+                    <div class="copyright-item"><strong>作品名称：</strong>电动汽车智能控制理论与方法</div>
+                    <div class="copyright-item"><strong>ISBN：</strong>978-7-89566-031-1</div>
+                    <div class="copyright-item"><strong>出版单位：</strong>高等教育电子音像出版社</div>
+                    <div class="copyright-item"><strong>出版时间：</strong>2024年12月15日</div>
+                    <div class="copyright-item"><strong>主编：</strong>陈虹</div>
+                    <div class="copyright-item"><strong>副主编：</strong>褚洪庆，郭露露</div>
+                    <div class="copyright-item"><strong>策划编辑：</strong>孙琳</div>
+                    <div class="copyright-notice">
+                        <strong>郑重声明：</strong>高等教育电子音像出版社依法对本数字教材享有专有的信息网络传播权、复制权、发行权等权利。任何不属于合理使用的、未经许可对本数字教材全部或部分的复制、传播、销售等使用行为均属违法，行为人将承担相应的民事、行政或刑事责任。如发现前述侵权行为，希望及时举报，我社将配合行政执法部门和司法机关对违法犯罪行为进行严厉打击。侵权举报电话：（010）58581999。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心内容模块 -->
+    <section class="content-section" id="content-section">
+        <div class="container">
+            <h2 class="section-title">核心内容</h2>
+            <div class="content-grid">
+                <div class="content-card" data-index="0">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#FF6B35" stroke-width="2"/>
+                            <path d="M30,50 L45,65 L70,35" stroke="#FF6B35" stroke-width="3" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3>控制理论概述</h3>
+                    <p>了解控制理论发展历程，熟悉动力、底盘及自动驾驶控制原子系统基本概念。</p>
+                </div>
+                
+                <div class="content-card" data-index="1">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 100 100">
+                            <rect x="20" y="30" width="60" height="40" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                            <circle cx="35" cy="50" r="5" fill="#4ECDC4"/>
+                            <circle cx="50" cy="50" r="5" fill="#4ECDC4"/>
+                            <circle cx="65" cy="50" r="5" fill="#4ECDC4"/>
+                        </svg>
+                    </div>
+                    <h3>经典控制理论</h3>
+                    <p>掌握数学模型建立、时域/频域分析法，以及PID与非线性控制系统分析。</p>
+                </div>
+                
+                <div class="content-card" data-index="2">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 100 100">
+                            <path d="M20,70 Q50,20 80,70" fill="none" stroke="#FF6B35" stroke-width="2"/>
+                            <line x1="50" y1="20" x2="50" y2="80" stroke="#FF6B35" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>现代控制理论</h3>
+                    <p>深入状态空间分析、卡尔曼滤波状态估计，掌握最优控制与LQR算法。</p>
+                </div>
+                
+                <div class="content-card" data-index="3">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 100 100">
+                            <path d="M30,50 L50,30 L70,50 L50,70 Z" fill="none" stroke="#4ECDC4" stroke-width="2"/>
+                            <circle cx="50" cy="50" r="10" fill="#4ECDC4"/>
+                        </svg>
+                    </div>
+                    <h3>鲁棒控制</h3>
+                    <p>研究模型不确定性表达、鲁棒稳定性分析，以及H∞范数控制器设计。</p>
+                </div>
+                
+                <div class="content-card" data-index="4">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 100 100">
+                            <rect x="25" y="25" width="50" height="50" fill="none" stroke="#FF6B35" stroke-width="2"/>
+                            <rect x="30" y="30" width="40" height="40" fill="none" stroke="#FF6B35" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <h3>模型预测控制</h3>
+                    <p>掌握MPC基本原理，应用于线控四轮转向车辆的稳定性控制与优化。</p>
+                </div>
+                
+                <div class="content-card" data-index="5">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="30" cy="40" r="8" fill="#4ECDC4"/>
+                            <circle cx="50" cy="30" r="8" fill="#4ECDC4"/>
+                            <circle cx="70" cy="40" r="8" fill="#4ECDC4"/>
+                            <path d="M30,40 L50,60 L70,40" stroke="#4ECDC4" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3>非线性控制</h3>
+                    <p>涵盖滑模控制、微分平坦、反馈线性化、Backstepping及三步法控制。</p>
+                </div>
+
+                <div class="content-card" data-index="6">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 100 100">
+                            <path d="M20,60 L40,60 L50,20 L60,80 L80,40" stroke="#FF6B35" stroke-width="2" fill="none"/>
+                            <circle cx="80" cy="40" r="5" fill="#FF6B35"/>
+                        </svg>
+                    </div>
+                    <h3>强化学习</h3>
+                    <p>探索值函数、策略梯度及深度强化学习在电动汽车智能控制中的应用。</p>
+                </div>
+
+                <div class="content-card" data-index="7">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 100 100">
+                            <circle cx="35" cy="35" r="5" fill="#4ECDC4"/>
+                            <circle cx="65" cy="35" r="5" fill="#4ECDC4"/>
+                            <circle cx="35" cy="65" r="5" fill="#4ECDC4"/>
+                            <circle cx="65" cy="65" r="5" fill="#4ECDC4"/>
+                            <line x1="35" y1="35" x2="65" y2="35" stroke="#4ECDC4" stroke-width="1"/>
+                            <line x1="35" y1="65" x2="65" y2="65" stroke="#4ECDC4" stroke-width="1"/>
+                            <line x1="35" y1="35" x2="35" y2="65" stroke="#4ECDC4" stroke-width="1"/>
+                            <line x1="65" y1="35" x2="65" y2="65" stroke="#4ECDC4" stroke-width="1"/>
+                            <path d="M40,50 L60,50" stroke="#4ECDC4" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>其他智能控制方法</h3>
+                    <p>融合模仿学习、元学习及神经网络，探索“数据+物理驱动”的交叉创新。</p>
+                </div>
+            </div>
+
+            <!-- 章节详情容器 -->
+            <div class="chapter-details-container" id="chapterDetails">
+                <button class="back-to-grid-btn">
+                    <span class="back-icon">←</span> 返回列表
+                </button>
+                
+                <div class="chapter-detail" data-chapter="0">
+                    <h3 class="detail-title">1 控制理论概述</h3>
+                    <div class="detail-content">
+                        <div class="detail-section">
+                            <h4>核心知识点</h4>
+                            <ul class="knowledge-points-list">
+                                <li>1.1 控制理论发展历程</li>
+                                <li>1.2 电动汽车智能控制系统基本概念</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4>主要内容</h4>
+                            <div class="detail-group">
+                                <h5>1.1 控制理论发展历程</h5>
+                                <ul>
+                                    <li>控制理论的产生与形成</li>
+                                    <li>经典控制理论阶段</li>
+                                    <li>现代控制理论阶段</li>
+                                    <li>智能控制理论的产生、发展与展望</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>1.2 电动汽车智能控制系统基本概念</h5>
+                                <ul>
+                                    <li>电动汽车动力控制系统</li>
+                                    <li>电动汽车底盘控制系统</li>
+                                    <li>智能辅助驾驶/自动驾驶中的控制系统</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-detail" data-chapter="1">
+                    <h3 class="detail-title">2 经典控制理论</h3>
+                    <div class="detail-content">
+                        <div class="detail-section">
+                            <h4>核心知识点</h4>
+                            <ul class="knowledge-points-list">
+                                <li>2.1 控制系统数学模型</li>
+                                <li>2.2 时域频域分析法</li>
+                                <li>2.3 控制系统设计</li>
+                                <li>2.4 经典控制应用案例</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4>主要内容</h4>
+                            <div class="detail-group">
+                                <h5>2.1 控制系统数学模型</h5>
+                                <ul>
+                                    <li>控制系统的时域数学模型</li>
+                                    <li>控制系统的复数域数学模型</li>
+                                    <li>控制系统的结构图与信号流图</li>
+                                    <li>控制系统建模实例</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>2.2 时域频域分析法</h5>
+                                <ul>
+                                    <li>线性系统的时域分析</li>
+                                    <li>线性系统的根轨迹法</li>
+                                    <li>线性系统的频域分析法</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>2.3 控制系统设计</h5>
+                                <ul>
+                                    <li>线性系统的矫正方法</li>
+                                    <li>线性离散控制系统设计方法</li>
+                                    <li>非线性控制系统分析与设计</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>2.4 经典控制应用案例</h5>
+                                <ul>
+                                    <li>基于 PID 的汽车速度控制</li>
+                                    <li>巡航控制系统设计</li>
+                                    <li>汽车控制系统稳定性分析</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-detail" data-chapter="2">
+                    <h3 class="detail-title">3 现代控制理论</h3>
+                    <div class="detail-content">
+                        <div class="detail-section">
+                            <h4>核心知识点</h4>
+                            <ul class="knowledge-points-list">
+                                <li>3.1 系统状态空间分析与综合</li>
+                                <li>3.2 状态估计器设计</li>
+                                <li>3.3 最优控制</li>
+                                <li>3.4 现代控制应用案例</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4>主要内容</h4>
+                            <div class="detail-group">
+                                <h5>3.1 系统状态空间分析与综合</h5>
+                                <ul>
+                                    <li>控制系统的状态能控性</li>
+                                    <li>线性系统的状态反馈控制和输出反馈控制</li>
+                                    <li>线性系统的极点配置</li>
+                                    <li>控制系统的状态能观测性</li>
+                                    <li>线性系统的状态观测器设计</li>
+                                    <li>带有观测器的状态反馈闭环系统</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>3.2 状态估计器设计</h5>
+                                <ul>
+                                    <li>最小二乘滤波技术</li>
+                                    <li>Alpha-Beta 滤波与 Alpha-Beta-Gamma 滤波</li>
+                                    <li>卡尔曼滤波技术</li>
+                                    <li>非线性系统状态估计</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>3.3 最优控制</h5>
+                                <ul>
+                                    <li>最优控制问题的数学描述</li>
+                                    <li>最优控制中的变分法</li>
+                                    <li>极小值原理</li>
+                                    <li>动态规划</li>
+                                    <li>线性二次型最优控制</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>3.4 现代控制应用案例</h5>
+                                <ul>
+                                    <li>基于卡尔曼滤波的路面附着系数估计</li>
+                                    <li>基于 LQR 的智能汽车横向控制</li>
+                                    <li>基于动态规划的混动车能量管理策略</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-detail" data-chapter="3">
+                    <h3 class="detail-title">4 鲁棒控制</h3>
+                    <div class="detail-content">
+                        <div class="detail-section">
+                            <h4>核心知识点</h4>
+                            <ul class="knowledge-points-list">
+                                <li>4.1 系统不确定性表达</li>
+                                <li>4.2 鲁棒控制分析</li>
+                                <li>4.3 鲁棒控制器设计</li>
+                                <li>4.4 鲁棒控制应用案例</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4>主要内容</h4>
+                            <div class="detail-group">
+                                <h5>4.1 系统不确定性表达</h5>
+                                <ul>
+                                    <li>模型的不确定性</li>
+                                    <li>含动态不确定性的系统集合</li>
+                                    <li>含参数不确定性的系统集合</li>
+                                    <li>含相位信息的不确定性的系统集合</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>4.2 鲁棒控制分析</h5>
+                                <ul>
+                                    <li>小增益原理</li>
+                                    <li>Lyapunov 方法</li>
+                                    <li>IQC 方法</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>4.3 鲁棒控制器设计</h5>
+                                <ul>
+                                    <li>控制问题与 H∞ 范数</li>
+                                    <li>H∞ 控制问题</li>
+                                    <li>Riccati 方程解法</li>
+                                    <li>LMI 求解</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>4.4 鲁棒控制应用案例</h5>
+                                <ul>
+                                    <li>主动悬架约束 H∞ 控制</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-detail" data-chapter="4">
+                    <h3 class="detail-title">5 模型预测控制</h3>
+                    <div class="detail-content">
+                        <div class="detail-section">
+                            <h4>核心知识点</h4>
+                            <ul class="knowledge-points-list">
+                                <li>5.1 线控主动四轮转向车辆结构及工作原理</li>
+                                <li>5.2 模型预测控制</li>
+                                <li>5.3 四轮转向车辆非线性模型预测控制</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4>主要内容</h4>
+                            <div class="detail-group">
+                                <h5>5.1 线控主动四轮转向车辆结构及工作原理</h5>
+                                <ul>
+                                    <li>线控主动四轮转向车辆的结构</li>
+                                    <li>线控主动四轮转向车辆的工作原理</li>
+                                    <li>问题描述</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>5.2 模型预测控制</h5>
+                                <ul>
+                                    <li>线性预测控制</li>
+                                    <li>非线性预测控制</li>
+                                    <li>滚动时域优化问题的求解</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>5.3 四轮转向车辆非线性模型预测控制</h5>
+                                <ul>
+                                    <li>控制框图</li>
+                                    <li>参考模型设计</li>
+                                    <li>非线性模型预测控制器设计</li>
+                                    <li>仿真结果</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-detail" data-chapter="5">
+                    <h3 class="detail-title">6 非线性控制</h3>
+                    <div class="detail-content">
+                        <div class="detail-section">
+                            <h4>核心知识点</h4>
+                            <ul class="knowledge-points-list">
+                                <li>6.1 滑模控制</li>
+                                <li>6.2 微分平坦</li>
+                                <li>6.3 反馈线性化</li>
+                                <li>6.4 反步法 (Backstepping)</li>
+                                <li>6.5 三步法控制</li>
+                                <li>6.6 非线性控制应用案例</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4>主要内容</h4>
+                            <div class="detail-group">
+                                <h5>6.1 滑模控制</h5>
+                                <ul>
+                                    <li>变结构控制基本原理</li>
+                                    <li>滑模面与趋近律设计</li>
+                                    <li>抖振抑制技术</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>6.2 微分平坦</h5>
+                                <ul>
+                                    <li>微分平坦系统定义与判别</li>
+                                    <li>轨迹规划应用</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>6.3 反馈线性化</h5>
+                                <ul>
+                                    <li>输入-输出线性化</li>
+                                    <li>输入-状态线性化</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>6.4 反步法 (Backstepping)</h5>
+                                <ul>
+                                    <li>递归设计思想</li>
+                                    <li>稳定性李雅普诺夫分析</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>6.5 三步法控制</h5>
+                                <ul>
+                                    <li>控制器架构设计</li>
+                                    <li>稳态与动态性能分析</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>6.6 非线性控制应用案例</h5>
+                                <ul>
+                                    <li>电动汽车驱动/转向系统非线性控制实例</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-detail" data-chapter="6">
+                    <h3 class="detail-title">7 强化学习</h3>
+                    <div class="detail-content">
+                        <div class="detail-section">
+                            <h4>核心知识点</h4>
+                            <ul class="knowledge-points-list">
+                                <li>7.1 强化学习基本概念</li>
+                                <li>7.2 值函数方法</li>
+                                <li>7.3 策略梯度方法</li>
+                                <li>7.4 深度强化学习</li>
+                                <li>7.5 强化学习应用案例</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4>主要内容</h4>
+                            <div class="detail-group">
+                                <h5>7.1 强化学习基本概念</h5>
+                                <ul>
+                                    <li>马尔可夫决策过程 (MDP)</li>
+                                    <li>奖励函数设计与环境建模</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>7.2 值函数方法</h5>
+                                <ul>
+                                    <li>Q-Learning算法原理</li>
+                                    <li>SARSA算法与时序差分学习</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>7.3 策略梯度方法</h5>
+                                <ul>
+                                    <li>策略搜索基础</li>
+                                    <li>Actor-Critic架构与优势函数</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>7.4 深度强化学习</h5>
+                                <ul>
+                                    <li>DQN算法及其变体</li>
+                                    <li>DDPG、PPO等连续空间算法</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>7.5 强化学习应用案例</h5>
+                                <ul>
+                                    <li>电动汽车能量管理策略优化</li>
+                                    <li>自动驾驶决策规划应用</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-detail" data-chapter="7">
+                    <h3 class="detail-title">8 其他智能控制方法</h3>
+                    <div class="detail-content">
+                        <div class="detail-section">
+                            <h4>核心知识点</h4>
+                            <ul class="knowledge-points-list">
+                                <li>8.1 模仿学习 (IL)</li>
+                                <li>8.2 元学习</li>
+                                <li>8.3 神经网络基础模型</li>
+                                <li>8.4 应用案例</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4>主要内容</h4>
+                            <div class="detail-group">
+                                <h5>8.1 模仿学习 (IL)</h5>
+                                <ul>
+                                    <li>行为克隆 (Behavior Cloning)</li>
+                                    <li>逆强化学习 (IRL)</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>8.2 元学习</h5>
+                                <ul>
+                                    <li>快速适应与少样本学习原理</li>
+                                    <li>MAML算法及其应用</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>8.3 神经网络基础模型</h5>
+                                <ul>
+                                    <li>卷积神经网络 (CNN) 基础</li>
+                                    <li>循环神经网络 (RNN/LSTM) 基础</li>
+                                </ul>
+                            </div>
+                            <div class="detail-group">
+                                <h5>8.4 应用案例</h5>
+                                <ul>
+                                    <li>驾驶风格模仿与行为预测</li>
+                                    <li>多工况自适应控制实例</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI 助手模块 -->
+    <section class="ai-section content-section" id="ai-section">
+        <div class="container">
+            <h2 class="section-title">AI 智能助手</h2>
+            <p class="section-description">与AI助手对话，获取关于电动汽车智能控制理论的学习支持</p>
+            <div class="ai-demo">
+                <div class="ai-card">
+                    <div class="ai-icon">🤖</div>
+                    <h3>智能问答</h3>
+                    <p>解答电动汽车控制理论相关问题</p>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon">📚</div>
+                    <h3>学习辅助</h3>
+                    <p>提供教材内容的学习指导</p>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-icon">💡</div>
+                    <h3>知识拓展</h3>
+                    <p>深入探讨智能控制方法</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 参考资料模块 -->
+    <section class="references-section content-section" id="references-section">
+        <div class="container">
+            <h2 class="section-title">参考资料</h2>
+            <div class="references-grid">
+                <div class="reference-card">
+                    <div class="reference-icon">📚</div>
+                    <h3>经典教材</h3>
+                    <ul class="reference-list">
+                        <li>《现代控制理论》- 刘豹</li>
+                        <li>《自动控制原理》- 胡寿松</li>
+                        <li>《电动汽车技术基础》- 陈清泉</li>
+                        <li>《智能控制理论与方法》- 李少远</li>
+                    </ul>
+                </div>
+                
+                <div class="reference-card">
+                    <div class="reference-icon">📖</div>
+                    <h3>学术论文</h3>
+                    <ul class="reference-list">
+                        <li>Model Predictive Control for Electric Vehicles</li>
+                        <li>Adaptive Control Strategies in EV Systems</li>
+                        <li>State Estimation Methods for Vehicle Dynamics</li>
+                        <li>Robust Control Applications in Automotive</li>
+                    </ul>
+                </div>
+                
+                <div class="reference-card">
+                    <div class="reference-icon">🔬</div>
+                    <h3>研究机构</h3>
+                    <ul class="reference-list">
+                        <li>IEEE Transactions on Vehicular Technology</li>
+                        <li>SAE International</li>
+                        <li>中国汽车工程学会</li>
+                        <li>新能源汽车国家大数据联盟</li>
+                    </ul>
+                </div>
+                
+                <div class="reference-card">
+                    <div class="reference-icon">💻</div>
+                    <h3>在线资源</h3>
+                    <ul class="reference-list">
+                        <li>MATLAB/Simulink 仿真平台</li>
+                        <li>CarSim 车辆动力学仿真</li>
+                        <li>ROS 机器人操作系统</li>
+                        <li>开源控制算法库</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 案例分析模块 -->
+    <section class="cases-section content-section" id="cases-section">
+        <div class="container">
+            <h2 class="section-title">案例分析</h2>
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-icon">🚗</div>
+                    <h3>线控转向系统控制</h3>
+                    <p>分析四轮独立驱动电动汽车的线控转向控制策略，研究其在极限工况下的路径跟踪表现与横向稳定性。</p>
+                </div>
+                <div class="case-card">
+                    <div class="case-icon">🔋</div>
+                    <h3>电池管理系统优化</h3>
+                    <p>结合现代控制理论，优化电池组的充放电均衡策略与热管理系统，提升能量利用率并延长电池循环寿命。</p>
+                </div>
+                <div class="case-card">
+                    <div class="case-icon">⚡</div>
+                    <h3>能量回收制动分析</h3>
+                    <p>研究电动汽车在城市工况下的再生制动效率，分析制动安全性与力矩分配的协调控制算法。</p>
+                </div>
+                <div class="case-card">
+                    <div class="case-icon">🛣️</div>
+                    <h3>自动寻迹决策规划</h3>
+                    <p>基于模型预测控制（MPC）的轨迹跟踪案例，分析车辆在复杂路面环境下的避障能力与实时决策逻辑。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 推荐课程模块 -->
+    <section class="courses-section content-section" id="courses-section">
+        <div class="container">
+            <h2 class="section-title">推荐课程</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-placeholder">📐</div>
+                    </div>
+                    <div class="course-info">
+                        <h3>模型预测控制</h3>
+                        <p class="course-instructor">Model Predictive Control</p>
+                        <p class="course-description">深入探讨模型预测控制在电动汽车中的应用，包括优化算法、约束处理等核心内容。</p>
+                        <div class="course-tags">
+                            <span class="tag">MPC</span>
+                            <span class="tag">优化控制</span>
+                            <span class="tag">电动汽车</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-placeholder">⚙️</div>
+                    </div>
+                    <div class="course-info">
+                        <h3>自适应控制系统</h3>
+                        <p class="course-instructor">Adaptive Control Systems</p>
+                        <p class="course-description">学习自适应控制理论，掌握参数估计、模型参考自适应等先进控制方法。</p>
+                        <div class="course-tags">
+                            <span class="tag">自适应</span>
+                            <span class="tag">参数估计</span>
+                            <span class="tag">鲁棒性</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-placeholder">🧠</div>
+                    </div>
+                    <div class="course-info">
+                        <h3>智能控制算法</h3>
+                        <p class="course-instructor">Intelligent Control Algorithms</p>
+                        <p class="course-description">涵盖模糊控制、神经网络、强化学习等智能算法在车辆控制中的应用。</p>
+                        <div class="course-tags">
+                            <span class="tag">AI</span>
+                            <span class="tag">机器学习</span>
+                            <span class="tag">智能算法</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image">
+                        <div class="course-placeholder">🚗</div>
+                    </div>
+                    <div class="course-info">
+                        <h3>车辆动力学建模</h3>
+                        <p class="course-instructor">Vehicle Dynamics Modeling</p>
+                        <p class="course-description">建立精确的车辆动力学模型，包括纵向、横向和垂向动力学分析。</p>
+                        <div class="course-tags">
+                            <span class="tag">动力学</span>
+                            <span class="tag">建模</span>
+                            <span class="tag">仿真</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>学科方向</h4>
+                    <p>智能网联与新能源汽车领域</p>
+                </div>
+                <div class="footer-section">
+                    <h4>教材类型</h4>
+                    <p>"十四五"规划教材</p>
+                </div>
+                <div class="footer-section">
+                    <h4>核心内容</h4>
+                    <p>智能控制理论 · 电动汽车技术 · 工程应用</p>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <p class="footer-copyright">© 2024 电动汽车智能控制理论与方法</p>
+        </div>
+    </footer>
+
+    <!-- AI 聊天窗口 -->
+    <div class="ai-chat-container" id="aiChatContainer">
+        <div class="ai-chat-header">
+            <h3>AI 智能助手</h3>
+            <button class="chat-close" id="chatClose">×</button>
+        </div>
+        <div class="ai-chat-messages" id="chatMessages">
+            <div class="chat-message ai-message">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <p>您好！我是AI智能助手，可以为您解答关于《电动汽车智能控制理论与方法》的相关问题。请问有什么可以帮助您的吗？</p>
+                </div>
+            </div>
+        </div>
+        <div class="ai-chat-input-container">
+            <input type="text" class="ai-chat-input" id="chatInput" placeholder="输入您的问题...">
+            <button class="chat-send" id="chatSend">发送</button>
+        </div>
+    </div>
+
+    <!-- AI 助手悬浮按钮 -->
+    <button class="ai-assistant-btn" id="aiAssistantBtn">
+        <span class="btn-icon">💬</span>
+        <span class="btn-pulse"></span>
+    </button>
+
+    <!-- 模块弹窗 -->
+    <div class="modal-overlay" id="moduleModal">
+        <div class="modal-window">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="modal-body" id="modalContent">
+                <!-- 动态注入内容 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
