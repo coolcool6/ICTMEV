@@ -1119,6 +1119,12 @@ body:hover .cursor-light {
     margin-top: 40px;
 }
 
+.case-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .case-card {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
@@ -1130,9 +1136,10 @@ body:hover .cursor-light {
     box-shadow: 0 4px 20px var(--shadow-light);
     opacity: 1;
     transform: translateY(0);
+    height: 100%;
 }
 
-.case-card:hover {
+.case-card-link:hover .case-card {
     transform: translateY(-12px) scale(1.02);
     border-color: var(--primary-orange);
     box-shadow: 0 15px 40px rgba(255, 107, 53, 0.25);
@@ -1146,7 +1153,7 @@ body:hover .cursor-light {
     transition: transform 0.3s ease;
 }
 
-.case-card:hover .case-icon {
+.case-card-link:hover .case-icon {
     transform: scale(1.2) rotate(10deg);
 }
 

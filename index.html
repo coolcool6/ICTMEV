@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="meta-item">
                                     <span class="meta-label">类型：</span>
-                                    <span class="meta-value">"十四五"规划教材</span>
+                                    <span class="meta-value">"十四五"高等教育教材</span>
                                 </div>
                             </div>
                         </div>
@@ -511,9 +511,9 @@
                                 <li>6.1 滑模控制</li>
                                 <li>6.2 微分平坦</li>
                                 <li>6.3 反馈线性化</li>
-                                <li>6.4 反步法 (Backstepping)</li>
+                                <li>6.4 Backstepping</li>
                                 <li>6.5 三步法控制</li>
-                                <li>6.6 非线性控制应用案例</li>
+                                <li>6.6 应用案例</li>
                             </ul>
                         </div>
                         <div class="detail-section">
@@ -521,43 +521,52 @@
                             <div class="detail-group">
                                 <h5>6.1 滑模控制</h5>
                                 <ul>
-                                    <li>变结构控制基本原理</li>
-                                    <li>滑模面与趋近律设计</li>
-                                    <li>抖振抑制技术</li>
+                                    <li>滑模控制问题概述</li>
+                                    <li>连续时间滑模控制</li>
+                                    <li>离散时间滑模控制</li>
+                                    <li>数值仿真</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>6.2 微分平坦</h5>
                                 <ul>
-                                    <li>微分平坦系统定义与判别</li>
-                                    <li>轨迹规划应用</li>
+                                    <li>微分平坦原理描述</li>
+                                    <li>平坦系统性质</li>
+                                    <li>应用举例</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>6.3 反馈线性化</h5>
                                 <ul>
+                                    <li>反馈线性化原理概述</li>
                                     <li>输入-输出线性化</li>
-                                    <li>输入-状态线性化</li>
+                                    <li>全状态线性化</li>
+                                    <li>状态反馈控制</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
-                                <h5>6.4 反步法 (Backstepping)</h5>
+                                <h5>6.4 Backstepping</h5>
                                 <ul>
-                                    <li>递归设计思想</li>
-                                    <li>稳定性李雅普诺夫分析</li>
+                                    <li>Backstepping 原理概述</li>
+                                    <li>Backstepping 设计流程和步骤</li>
+                                    <li>应用举例</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>6.5 三步法控制</h5>
                                 <ul>
-                                    <li>控制器架构设计</li>
-                                    <li>稳态与动态性能分析</li>
+                                    <li>三步法控制问题概述</li>
+                                    <li>三步法设计基本原理</li>
+                                    <li>三步法性能分析</li>
+                                    <li>三步法改进形式</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
-                                <h5>6.6 非线性控制应用案例</h5>
+                                <h5>6.6 应用案例</h5>
                                 <ul>
-                                    <li>电动汽车驱动/转向系统非线性控制实例</li>
+                                    <li>高压共轨系统轨压控制</li>
+                                    <li>电子节气门开度控制</li>
+                                    <li>电动汽车稳定性控制</li>
                                 </ul>
                             </div>
                         </div>
@@ -582,36 +591,43 @@
                             <div class="detail-group">
                                 <h5>7.1 强化学习基本概念</h5>
                                 <ul>
-                                    <li>马尔可夫决策过程 (MDP)</li>
-                                    <li>奖励函数设计与环境建模</li>
+                                    <li>强化学习基础概念</li>
+                                    <li>强化学习数理基础</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>7.2 值函数方法</h5>
                                 <ul>
-                                    <li>Q-Learning算法原理</li>
-                                    <li>SARSA算法与时序差分学习</li>
+                                    <li>值函数的基本概念</li>
+                                    <li>值函数的估计方法</li>
+                                    <li>策略改进与价值迭代</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>7.3 策略梯度方法</h5>
                                 <ul>
-                                    <li>策略搜索基础</li>
-                                    <li>Actor-Critic架构与优势函数</li>
+                                    <li>状态动作对</li>
+                                    <li>期望奖励</li>
+                                    <li>梯度上升最大化期望奖励</li>
+                                    <li>基于梯度策略的优化时的技巧</li>
+                                    <li>策略梯度中的蒙特卡洛(MC)方法和时序差分(TD)方法</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>7.4 深度强化学习</h5>
                                 <ul>
-                                    <li>DQN算法及其变体</li>
-                                    <li>DDPG、PPO等连续空间算法</li>
+                                    <li>深度强化学习概念</li>
+                                    <li>深度 Q 神经网络(DQN)方法</li>
+                                    <li>DQN 方法的改进，double DQN 和 Dueling DQN</li>
+                                    <li>Soft actor Critic (SAC) 方法</li>
+                                    <li>Twin Delayed Deep Deterministic policy gradient algorithm (TD3) 方法</li>
+                                    <li>Model based RL 方法</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>7.5 强化学习应用案例</h5>
                                 <ul>
-                                    <li>电动汽车能量管理策略优化</li>
-                                    <li>自动驾驶决策规划应用</li>
+                                    <li>强化学习在电动汽车智能控制中的应用案例</li>
                                 </ul>
                             </div>
                         </div>
@@ -624,7 +640,7 @@
                         <div class="detail-section">
                             <h4>核心知识点</h4>
                             <ul class="knowledge-points-list">
-                                <li>8.1 模仿学习 (IL)</li>
+                                <li>8.1 模仿学习</li>
                                 <li>8.2 元学习</li>
                                 <li>8.3 神经网络基础模型</li>
                                 <li>8.4 应用案例</li>
@@ -633,31 +649,33 @@
                         <div class="detail-section">
                             <h4>主要内容</h4>
                             <div class="detail-group">
-                                <h5>8.1 模仿学习 (IL)</h5>
+                                <h5>8.1 模仿学习</h5>
                                 <ul>
-                                    <li>行为克隆 (Behavior Cloning)</li>
-                                    <li>逆强化学习 (IRL)</li>
+                                    <li>模仿学习概述</li>
+                                    <li>模仿学习经典理论分类</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>8.2 元学习</h5>
                                 <ul>
-                                    <li>快速适应与少样本学习原理</li>
-                                    <li>MAML算法及其应用</li>
+                                    <li>元学习概述</li>
+                                    <li>元学习的经典理论与应用</li>
+                                    <li>元学习与多任务控制</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>8.3 神经网络基础模型</h5>
                                 <ul>
-                                    <li>卷积神经网络 (CNN) 基础</li>
-                                    <li>循环神经网络 (RNN/LSTM) 基础</li>
+                                    <li>前馈神经网络(FNN)</li>
+                                    <li>卷积神经网络(CNN)</li>
+                                    <li>循环神经网络(RNN)</li>
                                 </ul>
                             </div>
                             <div class="detail-group">
                                 <h5>8.4 应用案例</h5>
                                 <ul>
-                                    <li>驾驶风格模仿与行为预测</li>
-                                    <li>多工况自适应控制实例</li>
+                                    <li>案例 1——模仿学习在自动驾驶决策中的应用</li>
+                                    <li>案例 2——数据+物理模型驱动的自动驾驶赛车控制</li>
                                 </ul>
                             </div>
                         </div>
@@ -749,26 +767,48 @@
         <div class="container">
             <h2 class="section-title">案例分析</h2>
             <div class="cases-grid">
-                <div class="case-card">
-                    <div class="case-icon">🚗</div>
-                    <h3>线控转向系统控制</h3>
-                    <p>分析四轮独立驱动电动汽车的线控转向控制策略，研究其在极限工况下的路径跟踪表现与横向稳定性。</p>
-                </div>
-                <div class="case-card">
-                    <div class="case-icon">🔋</div>
-                    <h3>电池管理系统优化</h3>
-                    <p>结合现代控制理论，优化电池组的充放电均衡策略与热管理系统，提升能量利用率并延长电池循环寿命。</p>
-                </div>
-                <div class="case-card">
-                    <div class="case-icon">⚡</div>
-                    <h3>能量回收制动分析</h3>
-                    <p>研究电动汽车在城市工况下的再生制动效率，分析制动安全性与力矩分配的协调控制算法。</p>
-                </div>
-                <div class="case-card">
-                    <div class="case-icon">🛣️</div>
-                    <h3>自动寻迹决策规划</h3>
-                    <p>基于模型预测控制（MPC）的轨迹跟踪案例，分析车辆在复杂路面环境下的避障能力与实时决策逻辑。</p>
-                </div>
+                <a href="https://github.com/coolcool6/Intelligent-Control-Theories-and-Methods-for-Electric-Vehicles-Case/tree/main/2.5_%E7%BA%BF%E6%80%A7%E6%97%A0%E7%BA%A6%E6%9D%9FMPC%E6%95%B0%E5%80%BC%E4%BE%8B%E5%AD%90" target="_blank" rel="noopener noreferrer" class="case-card-link">
+                    <div class="case-card">
+                        <div class="case-icon">📊</div>
+                        <h3>线性无约束 MPC 数值例子</h3>
+                        <p>通过典型数值实例演示线性无约束模型预测控制的基本求解过程与仿真分析。</p>
+                    </div>
+                </a>
+                <a href="https://github.com/coolcool6/Intelligent-Control-Theories-and-Methods-for-Electric-Vehicles-Case/tree/main/2.6_%E5%AE%9A%E9%80%9F%E5%B7%A1%E8%88%AA%E6%8E%A7%E5%88%B6" target="_blank" rel="noopener noreferrer" class="case-card-link">
+                    <div class="case-card">
+                        <div class="case-icon">🛣️</div>
+                        <h3>定速巡航控制</h3>
+                        <p>基于经典控制理论实现的车辆定速巡航系统设计，分析其在不同路况下的稳态表现。</p>
+                    </div>
+                </a>
+                <a href="https://github.com/coolcool6/Intelligent-Control-Theories-and-Methods-for-Electric-Vehicles-Case/tree/main/3.5_%E5%9F%BA%E4%BA%8E%E9%98%B6%E8%B7%83%E5%93%8D%E5%BA%94%E7%9A%84%E7%94%B5%E6%9C%BA%E5%8A%9B%E7%9F%A9%E6%8E%A7%E5%88%B6" target="_blank" rel="noopener noreferrer" class="case-card-link">
+                    <div class="case-card">
+                        <div class="case-icon">📉</div>
+                        <h3>基于阶跃响应的电机力矩控制</h3>
+                        <p>通过阶跃响应分析法研究电机力矩控制系统的动态特性，优化控制参数以提升响应速度。</p>
+                    </div>
+                </a>
+                <a href="https://github.com/coolcool6/Intelligent-Control-Theories-and-Methods-for-Electric-Vehicles-Case/tree/main/4.5_%E5%9F%BA%E4%BA%8E%E8%84%89%E5%86%B2%E5%93%8D%E5%BA%94%E7%9A%84%E7%94%B5%E6%9C%BA%E5%8A%9B%E7%9F%A9%E6%8E%A7%E5%88%B6" target="_blank" rel="noopener noreferrer" class="case-card-link">
+                    <div class="case-card">
+                        <div class="case-icon">📈</div>
+                        <h3>基于脉冲响应的电机力矩控制</h3>
+                        <p>利用脉冲响应技术对电机力矩系统进行频域分析，评估系统的抗干扰能力与稳定性。</p>
+                    </div>
+                </a>
+                <a href="https://github.com/coolcool6/Intelligent-Control-Theories-and-Methods-for-Electric-Vehicles-Case/tree/main/5.5_%E7%BA%BF%E6%80%A7%E7%B3%BB%E7%BB%9F%E7%BA%A6%E6%9D%9F%E9%A2%84%E6%B5%8B%E6%8E%A7%E5%88%B6%E6%95%B0%E5%80%BC%E4%BE%8B%E5%AD%90" target="_blank" rel="noopener noreferrer" class="case-card-link">
+                    <div class="case-card">
+                        <div class="case-icon">🎯</div>
+                        <h3>线性系统约束预测控制数值例子</h3>
+                        <p>在考虑执行器饱和与状态约束的前提下，演示线性系统 MPC 的滚动优化过程。</p>
+                    </div>
+                </a>
+                <a href="https://github.com/coolcool6/Intelligent-Control-Theories-and-Methods-for-Electric-Vehicles-Case/tree/main/5.6_%E8%B7%9F%E8%BD%A6%E6%8E%A7%E5%88%B6%E9%97%AE%E9%A2%98" target="_blank" rel="noopener noreferrer" class="case-card-link">
+                    <div class="case-card">
+                        <div class="case-icon">🚗</div>
+                        <h3>跟车控制问题</h3>
+                        <p>分析自适应巡航系统中的跟车控制逻辑，权衡行车安全、燃油经济性与驾驶舒适性。</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -863,7 +903,7 @@
                 </div>
             </div>
             <div class="footer-divider"></div>
-            <p class="footer-copyright">© 2024 电动汽车智能控制理论与方法</p>
+            <p class="footer-copyright">© 2025 电动汽车智能控制理论与方法</p>
         </div>
     </footer>
 
